@@ -32,6 +32,10 @@ export default class Card extends React.Component {
     this.setState({ loading: false });
   };
 
+  shouldComponentUpdate(nextProps){
+    return this.props.linkText !== nextProps.linkText;
+  }
+
   render() {
     const { fullName, image, linkText, onPressLinkText } = this.props;
     const { loading } = this.state;
