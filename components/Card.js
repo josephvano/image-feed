@@ -14,8 +14,8 @@ export default class Card extends React.Component {
   static propTypes = {
     fullName       : PropTypes.string.isRequired,
     image          : Image.propTypes.source.isRequired,
-    linkText       : PropTypes.string.isRequired,
-    onPressLinkText: PropTypes.func.isRequired
+    linkText       : PropTypes.string,
+    onPressLinkText: PropTypes.func
   };
 
   static defaultProps = {
