@@ -1,4 +1,5 @@
 import React         from 'react';
+import PropTypes     from 'prop-types';
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -10,7 +11,11 @@ import CardList      from "../components/CardList";
 
 export default class Feed extends React.Component {
   static propTypes = {
-    style: ViewPropTypes.style
+    style          : ViewPropTypes.style,
+    commentsForItem: PropTypes.objectOf(
+      PropTypes.arrayOf(PropTypes.string),
+    ).isRequired,
+    onPressComments: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -40,8 +45,8 @@ export default class Feed extends React.Component {
   }
 
   render() {
-    const {style}                 = this.props;
-    const {loading, error, items} = this.state;
+    const {style, commentsForItem, onPressComments} = this.props;
+    const {loading, error, items}                   = this.state;
 
     if (loading) {
       return <ActivityIndicator size={'large'}/>
@@ -53,7 +58,11 @@ export default class Feed extends React.Component {
 
     return (
       <SafeAreaView style={style}>
-        <CardList items={items}/>
+        <CardList
+          items={items}
+          commentsForItem={commentsForItem}
+          onPressComments={onPressComments}
+        />
       </SafeAreaView>
     );
   }
